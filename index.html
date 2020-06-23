@@ -20,21 +20,33 @@
         <div id="covid-div">
 
         </div>
-        <div id="usercovid-div">
-            <h4>Compare with your selected Region below:</h4>
+        <br>
+        <!-- need to add space between here -->
 
+        <div id="usercovid-div">
+            <h4>Click to genereate current stats in your location</h4>
+            <input type="button" id="user_current_location" value="Your Stat's">
+            
+            <div class="display_user_stats">
+                Total cases:
+                <br>
+                New Cases:
+                <br>
+                Deaths Today:
+            </div>
+
+
+        </div>
+
+        <div class="searchable_stats">
+            <h4> Search Stats in other Locations</h4>
             <!-- Make a container above in order to flex all data below -->
 
             <!-- Maybe should make it type in country? with auto update or complete  -->
-            <select id="Country-sel">
+           <form>
+            <select id="Country-sel"></select><button id="country">submit</button>
+           </form> 
 
-            </select>
-            <select id="State-sel">
-
-            </select>
-            <select id="City-sel">
-
-            </select>
         </div>
 
     </main>
