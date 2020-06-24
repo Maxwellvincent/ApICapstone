@@ -24,22 +24,24 @@
         <!-- need to add space between here -->
 
         <div id="usercovid-div">
-            <h4>Click to genereate current stats in your location</h4>
+            <h4>Click to genereate current stats in your location as of this date: <span id="current-date"></span></h4>
             <input type="button" id="user_current_location" value="Your Stat's">
             
             <div class="display_user_stats">
-                Total cases:
+                <p id="user-current-location">Your current location is in: </p>
                 <br>
-                New Cases:
+                <p id="user-total-cases">Total cases: </p>
                 <br>
-                Deaths Today:
+                <p id="user-new-cases">New Cases: </p>
+                <br>
+                <p id="user-new-deaths-today">Deaths Today: </p>
             </div>
 
 
         </div>
 
         <div class="searchable_stats">
-            <h4> Search Stats in other Locations</h4>
+            <h4> Search Stats in other Countries</h4>
             <!-- Make a container above in order to flex all data below -->
 
             <!-- Maybe should make it type in country? with auto update or complete  -->
