@@ -1,11 +1,28 @@
 const userLocation = $('#user_current_location');
 const user_key = "AIzaSyDSG6JxsJRLwUirDGdkGlnHMEHcmbpvvuA";
+const searchCountry = $('#Country-sel');
+const newCountryList = [];
 var selectedUserLocation;
 
 function getCovidGlobalStats(){
     fetch(`https://api.covid19api.com/summary`)
     .then(response => response.json())
-    .then(responsejson => placeStat(responsejson.Global))
+    .then(responsejson => {
+        placeStat(responsejson.Global);
+
+        // Generates an array of objects containing countries
+        let listOfCountries = responsejson.Countries;
+        // console.log(listOfCountries.find((data) => console.log(data.Slug)));
+        // let newCountryList = [];
+
+         listOfCountries.forEach((item) => {
+            
+            newCountryList.push(item.Country);
+        });
+        
+        // grabUserInput(newCountryList);
+
+    })
     .catch(error => alert(error))
 }
 
@@ -19,7 +36,6 @@ function getLocationSpecificCovidStats(country){
             // Generates an array of objects containing countries
             let listOfCountries = responsejson.Countries;
             // console.log(listOfCountries.find((data) => console.log(data.Slug)));
-
 
             listOfCountries.filter((data) => {
                     if(data.Slug == country) {
@@ -60,7 +76,7 @@ function placeUserspecificLocationStats(data){
 
 function placeStat(stat){
     
-    console.log(Object.entries(stat));
+    // console.log(Object.entries(stat));
 
     let newDeath = Object.entries(stat)[2][0];
     let newDeathNum = Object.entries(stat)[2][1];
@@ -126,6 +142,12 @@ userLocation.on("click", (e) => {
 
 
 
+searchCountry.on("keyup", function grabUserInput(e){
+    let userInputData = e.target.value.toUpperCase();
+    console.log(userInputData);
+});
+
 
 
 getCovidGlobalStats()
+
