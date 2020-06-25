@@ -57,6 +57,29 @@ function getLocationSpecificCovidStats(country){
     
 }
 
+function userSelectedPlaceStats(slugform){
+    console.log("This works")
+    console.log(slugForm);
+    fetch(`https://api.covid19api.com/summary`)
+    .then(response => response.json())
+    // Figure out how to get the users (country) to match the object for the data
+    .then(responsejson => 
+        {
+            // Generates an array of objects containing countries
+            let listOfCountries = responsejson.Countries;
+            // console.log(listOfCountries.find((data) => console.log(data.Slug)));
+
+            listOfCountries.filter((data) => {
+                    if(data.Slug == slugForm) {
+                        console.log(data);
+                        // create a function to place this data for stats in other Countries
+                    };
+                })
+
+        })
+    .catch((error) => alert(error));
+}
+
 function placeUserspecificLocationStats(data){
     // data here is in reference to an object, that contains properties as Current Data, NewConfirmed cases, NewDeaths, NewRecovered, Slug, TotalConfirmed, TotalDeaths, TotalRecovered
         let userTotalCases = data.TotalConfirmed;
@@ -142,7 +165,7 @@ userLocation.on("click", (e) => {
 
 
 
-searchCountry.on("keyup", function grabUserInput(e){
+searchCountry.on("keyup submit", function grabUserInput(e){
     e.preventDefault();
     let userInputData = e.target.value;
     let arryOfCountry = [];
@@ -171,6 +194,7 @@ searchCountry.on("keyup", function grabUserInput(e){
    console.log(userValue);
    if(userValue.includes(' ')){
        let slugForm = userValue.split(' ').join('-');
+       console.log(slugForm);
    }
     
 });
