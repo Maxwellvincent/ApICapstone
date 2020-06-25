@@ -46,8 +46,11 @@
             <!-- Make a container above in order to flex all data below -->
 
             <!-- Maybe should make it type in country? with auto update or complete  -->
-           <form>
-            <input type="text" id="Country-sel"></input><button id="country">submit</button>
+           <form id="country-opt">
+            <input type="search" name="country-sel" id="Country-sel" list="country-choices"></input>
+            <datalist id="country-choices">
+            </datalist>
+            <input type="submit">
            </form> 
 
         </div>

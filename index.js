@@ -143,9 +143,39 @@ userLocation.on("click", (e) => {
 
 
 searchCountry.on("keyup", function grabUserInput(e){
-    let userInputData = e.target.value.toUpperCase();
-    console.log(userInputData);
+    e.preventDefault();
+    let userInputData = e.target.value;
+    let arryOfCountry = [];
+    fetch(`https://api.covid19api.com/summary`)
+    .then(response => response.json())
+    .then(responsejson => {
+        let listOfCountries = responsejson.Countries;
+        
+        listOfCountries.forEach((item) => {
+           arryOfCountry.push(item.Country.toLowerCase());
+        })
+        // console.log(arryOfCountry);
+        // console.log(userInputData);
+
+        for(i = 0; i < arryOfCountry.length; i++){
+            if(arryOfCountry[i].indexOf(userInputData) > -1){
+                if(arryOfCountry[i] == userInputData){
+                    $('#country-choices').append(`<option value="${arryOfCountry[i]}"${arryOfCountry[i]}</option>`);
+                }
+                
+            } 
+        }
+    });
+
+   let userValue = $('#Country-sel').val()
+   console.log(userValue);
+   if(userValue.includes(' ')){
+       let slugForm = userValue.split(' ').join('-');
+   }
+    
 });
+
+
 
 
 
