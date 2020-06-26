@@ -16,11 +16,10 @@ function getCovidGlobalStats(){
         // let newCountryList = [];
 
          listOfCountries.forEach((item) => {
-            
+            // create an array, and push each country the API has into the array.
             newCountryList.push(item.Country);
         });
         
-        // grabUserInput(newCountryList);
 
     })
     .catch(error => alert(error))
@@ -43,8 +42,6 @@ function getLocationSpecificCovidStats(country){
                         placeUserspecificLocationStats(data);
                     };
                 })
-
-
 
             // console.log(listOfCountries.filter((data) => {
             //     if(data.Slug == country) {
@@ -141,12 +138,13 @@ function setUserLocation(latitude,longitude){
     .then(response => response.json())
     .then(responsejson => {
         // console.log(responsejson.results[9].address_components[0].long_name);
-        selectedUserLocation = responsejson.results[9].address_components[0].long_name;
-        console.log(selectedUserLocation);
+        
+        selectedUserLocation = responsejson.results[8].address_components[0].long_name;
+        // console.log(selectedUserLocation);
         // getLocationSpecificCovidStats(selectedUserLocation);
         if(selectedUserLocation.includes(' ')){
             let replacedStr = selectedUserLocation.split(' ').join('-');
-            console.log(replacedStr.toLowerCase());
+            // console.log(replacedStr.toLowerCase());
             getLocationSpecificCovidStats(replacedStr.toLowerCase());
         }
         
@@ -165,39 +163,97 @@ userLocation.on("click", (e) => {
 
 
 
-searchCountry.on("keyup submit", function grabUserInput(e){
-    e.preventDefault();
-    let userInputData = e.target.value;
-    let arryOfCountry = [];
-    fetch(`https://api.covid19api.com/summary`)
-    .then(response => response.json())
-    .then(responsejson => {
-        let listOfCountries = responsejson.Countries;
+// May not use this either
+// function filterCountries(inp,arr){
+//     console.log(inp);
+//     console.log(arr);
+//     inp.on('input', function(e) {
+//         console.log(this.id);
+//         let a,b,i;
+//         let userInput = this.value;
+//         console.log(userInput);
         
-        listOfCountries.forEach((item) => {
-           arryOfCountry.push(item.Country.toLowerCase());
-        })
-        // console.log(arryOfCountry);
-        // console.log(userInputData);
+//         a = `<div id="${this.id} autocomplete-list" class="autocomplete-items"></div>`;
+//     $('.autocomplete').append(a);       
 
-        for(i = 0; i < arryOfCountry.length; i++){
-            if(arryOfCountry[i].indexOf(userInputData) > -1){
-                if(arryOfCountry[i] == userInputData){
-                    $('#country-choices').append(`<option value="${arryOfCountry[i]}"${arryOfCountry[i]}</option>`);
-                }
+//         for(i = 0; i < arr.length; i++){
+//             if(arr[i].substr(0,userInput.length).toUpperCase() == userInput.toUpperCase()){
+//                 b = `
+//                 <div>
+//                 <strong>${arr[i].substr(0,userInput.length)}</strong>
+//                 ${arr[i].substr(userInput.length)}
+//                 <input type="hidden" value="${arr[i]}">
+//                 </div>`;
+//                 console.log(b);
                 
-            } 
-        }
-    });
-
-   let userValue = $('#Country-sel').val()
-   console.log(userValue);
-   if(userValue.includes(' ')){
-       let slugForm = userValue.split(' ').join('-');
-       console.log(slugForm);
-   }
+//             }
+//         }
+//         $('.autocomplete-items').append(b);
+//         console.log(typeof b);
+//         b.on("click", function(e){
+//             console.log(e.currentTarget);
+//         });
+//     });
     
-});
+//     function closeList(ele){
+//         let x = $('.autocomplete-items');
+//         console.log(x.length);
+//         for (i = 0; i < x.length; i++){
+//             if(ele != x[i] && ele != inp){
+//                 x[i].parentNode.removeChild(x[i]);
+//             }
+//         }
+//     }
+// }
+
+
+// filterCountries(searchCountry,newCountryList)
+
+// This grabs the search bar, and adds a keyup event
+// we want the user to filter through a list of Countries, 
+// to select the one that they want to view stats on. 
+// searchCountry.on("keyup", function grabUserInput(e){
+//     // This works
+//     console.log("this works");
+//     // List of countries works
+//     console.log(newCountryList);
+
+
+
+
+// //     e.preventDefault();
+// //     let userInputData = e.target.value;
+// //     let arryOfCountry = [];
+// //     fetch(`https://api.covid19api.com/summary`)
+// //     .then(response => response.json())
+// //     .then(responsejson => {
+// //         let listOfCountries = responsejson.Countries;
+        
+// //         listOfCountries.forEach((item) => {
+// //            arryOfCountry.push(item.Country.toLowerCase());
+// //         })
+// //         // console.log(arryOfCountry);
+// //         // console.log(userInputData);
+
+// //         for(i = 0; i < arryOfCountry.length; i++){
+// //             if(arryOfCountry[i].indexOf(userInputData) > -1){
+
+// //                 if(arryOfCountry[i] == userInputData){
+// //                     $('#country-choices').append(`<option value="${arryOfCountry[i]}"${arryOfCountry[i]}</option>`);
+// //                 }
+                
+// //             } 
+// //         }
+// //     });
+
+// //    let userValue = $('#Country-sel').val()
+// //    console.log(userValue);
+// //    if(userValue.includes(' ')){
+// //        let slugForm = userValue.split(' ').join('-');
+// //        console.log(slugForm);
+// //    }
+    
+// });
 
 
 
