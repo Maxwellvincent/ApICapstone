@@ -181,24 +181,67 @@ userLocation.on("click", (e) => {
     getUserLocation();
 });
 
-const userSearch = $('#country-sel')
 
+// filters through fetch data of countries, and matches it to the searchtxt of the user. 
+function filterArry(searchText){
+    console.log(searchText.length);
+    let matches = newCountryList.filter(function(country){
+        const reg = new RegExp(`^${searchText}`,`gi`);
+        return country.match(reg);
+    });
+    console.log(matches);
+    if(searchText.length === 0){
+        matches = [];
+        console.log(matches);
+    }
+
+    outputHTML(matches)
+}
+
+// takes the array of matches, and inputs it on the page in html
+function outputHTML(matches){
+
+    const html = matches.map(match => 
+        `
+            <div class="sel-country">
+                <h4>${match}</h4>
+            </div>
+        `
+        ).join('');
+    console.log(html);
+    $('.match-list').html(html);
+
+}
+
+$('.match-list').on("click", function(e){
+    console.log(e.target);
+    userSearch.val(e.target.innerText); 
+    let slug = userSearch.val().toLowerCase().split(' ').join('-');
+    console.log(slug);
+    console.log(userSearch.val());
+
+    // Need to pass the slug into function that brings back results for that country!
+})
+
+const userSearch = $('#country-sel');
 userSearch.on("input", function(e){
     let userIn = this.value.toLowerCase();
     console.log(userIn);
-    newCountryList.filter(function(item,e) {
-        console.log(this.value);
-        let divEle = $(`<div>${item}</div>`)
-        if(item.toLowerCase().indexOf(userIn) > - 1){
-            
-            divEle.css("display", "block");
-            $('.autocomplete').append(divEle);
-        } else {
+    filterArry(userIn)
 
-            divEle.css("display", "none");
-            $('.autocomplete').append(divEle); 
-        }
-    });
+    // newCountryList.filter(function(item,e) {
+    //     console.log(this.value);
+    //     let divEle = $(`<div>${item}</div>`)
+    //     if(item.toLowerCase().indexOf(userIn) > - 1){
+            
+    //         divEle.css("display", "block");
+    //         $('.autocomplete').append(divEle);
+    //     } else {
+
+    //         divEle.css("display", "none");
+    //         $('.autocomplete').append(divEle); 
+    //     }
+    // });
 
 
     // this works but is not hiding the elements after full search
