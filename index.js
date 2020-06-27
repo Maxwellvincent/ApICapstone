@@ -4,6 +4,10 @@ const searchCountry = $('#Country-sel');
 const newCountryList = [];
 var selectedUserLocation;
 
+const finalCountries = [
+    "Afghanistan","Albania","Algeria","Andorra","Angola","Antigua and Barbuda","Argentina","Armenia","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Brunei Darussalam","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Central African Republic","Chad","Chile","China","Colombia","Comoros","Congo (Brazzaville)","Congo (Kinshasa)","Costa Rica","Croatia","Cuba","Cyprus","Czech Republic","Côte d'Ivoire","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Ethiopia","Fiji","Finland","France","Gabon","Gambia","Georgia","Germany","Ghana","Greece","Grenada","Guatemala","Guinea","Guinea-Bissau","Guyana","Haiti","Holy See (Vatican City State)","Honduras","Hungary","Iceland","India","Indonesia","Iran, Islamic Republic of","Iraq","Ireland","Israel","Italy","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Korea (South)","Kuwait","Kyrgyzstan","Lao PDR","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macedonia, Republic of","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Mauritania","Mauritius","Mexico","Moldova","Monaco","Mongolia","Montenegro","Morocco","Mozambique","Myanmar","Namibia","Nepal","Netherlands","New Zealand","Nicaragua","Niger","Nigeria","Norway","Oman","Pakistan","Palestinian Territory","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Qatar","Republic of Kosovo","Romania","Russian Federation","Rwanda","Saint Kitts and Nevis","Saint Lucia","Saint Vincent and Grenadines","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Somalia","South Africa","South Sudan","Spain","Sri Lanka","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syrian Arab Republic (Syria)","Taiwan, Republic of China","Tajikistan","Tanzania, United Republic of","Thailand","Timor-Leste","Togo","Trinidad and Tobago","Tunisia","Turkey","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States of America","Uruguay","Uzbekistan","Venezuela (Bolivarian Republic)","Viet Nam","Western Sahara","Yemen","Zambia","Zimbabwe"
+];
+
 function getCovidGlobalStats(){
     fetch(`https://api.covid19api.com/summary`)
     .then(response => response.json())
@@ -12,6 +16,7 @@ function getCovidGlobalStats(){
 
         // Generates an array of objects containing countries
         let listOfCountries = responsejson.Countries;
+        
         // console.log(listOfCountries.find((data) => console.log(data.Slug)));
         // let newCountryList = [];
 
@@ -38,7 +43,7 @@ function getLocationSpecificCovidStats(country){
 
             listOfCountries.filter((data) => {
                     if(data.Slug == country) {
-                        console.log(data);
+                        // console.log(data);
                         placeUserspecificLocationStats(data);
                     };
                 })
@@ -79,17 +84,27 @@ function userSelectedPlaceStats(slugform){
 
 function placeUserspecificLocationStats(data){
     // data here is in reference to an object, that contains properties as Current Data, NewConfirmed cases, NewDeaths, NewRecovered, Slug, TotalConfirmed, TotalDeaths, TotalRecovered
+        console.log(data);
         let userTotalCases = data.TotalConfirmed;
         let currentDate = data.Date;
         let userNewCases = data.NewConfirmed;
         let userDeathsToday = data.NewDeaths;
         let userCurrentLocation = data.Country;
-        console.log(userTotalCases);
-        $('#user-current-location').append(` ${userCurrentLocation}`);
-        $('#current-date').append(` ${currentDate}`);
-        $('#user-total-cases').append(` ${userTotalCases}`);
-        $('#user-new-cases').append(` ${userNewCases}`);
-        $('#user-new-deaths-today').append(` ${userDeathsToday}`);
+        let pElement1 = $('<p id="user-current-location"></p>').text(`Your current location is in: ${userCurrentLocation}`);
+        let pElement2 = $('#current-date').text(`${currentDate}`);
+        pElement1.append(" ",pElement2);
+        let pElement3 = $('<p id="user-total-cases"></p>').text(`Total cases: ${userTotalCases}`);
+        let pElement4 = $('<p id="user-new-cases"></p>').text(`New Cases: ${userNewCases}`);
+        let pElement5 = $('<p id="user-new-deaths-today"></p>').text(`Total Deaths: ${userDeathsToday}`);
+
+        // console.log(userTotalCases);
+        // $('#user-current-location').append(` ${userCurrentLocation}`);
+        // $('#current-date').append(` ${currentDate}`);
+        // $('#user-total-cases').append(` ${userTotalCases}`);
+        // $('#user-new-cases').append(` ${userNewCases}`);
+        // $('#user-new-deaths-today').append(` ${userDeathsToday}`);
+
+        $('.display_user_stats').append(pElement1,pElement3,pElement4,pElement5);
 
         // could possibly loop through this data and place all stats.
 }
@@ -119,9 +134,12 @@ function placeStat(stat){
     $('#covid-div').append(`<div><strong>${totalRecovered} cases:</strong> ${totalRecoveredNum}</div>`);
 }
 
+function clearStats(){
+    $('.display_user_stats').empty();
+}
 // Grabs the user's location from browser, user has to allow browser to grab their location.
 function getUserLocation(){
-    console.log(navigator.geolocation.getCurrentPosition(showCoordinate));
+    navigator.geolocation.getCurrentPosition(showCoordinate);
 }
 
 // This functions handles the position data the is generated within getCurrentPosition, and grabs long, and latt of the user and sets it to setUserLocation funciton
@@ -138,8 +156,8 @@ function setUserLocation(latitude,longitude){
     .then(response => response.json())
     .then(responsejson => {
         // console.log(responsejson.results[9].address_components[0].long_name);
-        
-        selectedUserLocation = responsejson.results[8].address_components[0].long_name;
+        console.log()
+        selectedUserLocation = responsejson.results[responsejson.results.length -1].address_components[0].long_name;
         // console.log(selectedUserLocation);
         // getLocationSpecificCovidStats(selectedUserLocation);
         if(selectedUserLocation.includes(' ')){
@@ -153,13 +171,54 @@ function setUserLocation(latitude,longitude){
 
 
 userLocation.on("click", (e) => {
+    // clears current html
+    clearStats();
     // Need to clear information if clicked again!!!!
     // function clearData()
     // what do we want to happen when this is clicked?
     // We want to grab the user's current location
-    console.log("this was clicked");
+    // console.log("this was clicked");
     getUserLocation();
 });
+
+const userSearch = $('#country-sel')
+
+userSearch.on("input", function(e){
+    let userIn = this.value.toLowerCase();
+    console.log(userIn);
+    newCountryList.filter(function(item,e) {
+        console.log(this.value);
+        let divEle = $(`<div>${item}</div>`)
+        if(item.toLowerCase().indexOf(userIn) > - 1){
+            
+            divEle.css("display", "block");
+            $('.autocomplete').append(divEle);
+        } else {
+
+            divEle.css("display", "none");
+            $('.autocomplete').append(divEle); 
+        }
+    });
+
+
+    // this works but is not hiding the elements after full search
+    // newCountryList.forEach((country) => {
+    //     // Create a div element for each country
+    //     let divEle = $(`<div>${country}</div>`)
+    //     if(country.toLowerCase().indexOf(this.value.toLowerCase()) > -1){
+    //         console.log(country);
+    //         // need to create element to store 
+    //         // add a display of block
+    //         $('.autocomplete').append(divEle.css("display","block"));
+    //     } else {
+    //         // need to hide other elements. 
+    //         // add display style of none
+    //         $('.autocomplete').append(divEle.css("display","none"));
+    //     }
+    //     console.log(divEle);
+    // });
+})
+
 
 
 
