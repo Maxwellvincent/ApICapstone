@@ -59,9 +59,9 @@ function getLocationSpecificCovidStats(country){
     
 }
 
-function userSelectedPlaceStats(slugform){
+function userSelectedPlaceStats(slug){
     console.log("This works")
-    console.log(slugForm);
+    console.log(slug);
     fetch(`https://api.covid19api.com/summary`)
     .then(response => response.json())
     // Figure out how to get the users (country) to match the object for the data
@@ -72,9 +72,29 @@ function userSelectedPlaceStats(slugform){
             // console.log(listOfCountries.find((data) => console.log(data.Slug)));
 
             listOfCountries.filter((data) => {
-                    if(data.Slug == slugForm) {
+                
+                    if(data.Country == slug) {
                         console.log(data);
                         // create a function to place this data for stats in other Countries
+
+                        // function placeSelectedCountryStats(data){
+                            let selCntryTot = data.TotalConfirmed;
+                            let selCntyTotDeaths = data.TotalDeaths;
+                            let selCntryNewCases = data.NewConfirmed;
+                            let selCntryNewDeaths = data.NewDeaths;
+                            // we need total cases = data.TotalConfirmed
+                                let text1 = $('<p id="total-cases"></p>').text(`Total cases: ${selCntryTot}`);
+                            //  total deaths = data.TotalDeaths
+                                let text2 = $('<p id="total-deaths"></p>').text(`Total Deaths: ${selCntyTotDeaths}`);
+                            //  new cases = data.NewConfirmed
+                                let text3 = $('<p id="new-cases"></p>').text(`New Cases Today: ${selCntryNewCases}`);
+                            //  new deaths = data.NewDeaths
+                                let text4 = $('<p id="new-deaths"></p>').text(`New Deaths Today: ${selCntryNewDeaths}`);
+
+                                $('.autocomplete-stats').append(text1,text2,text3,text4);
+                        // }
+
+
                     };
                 })
 
@@ -136,6 +156,7 @@ function placeStat(stat){
 
 function clearStats(){
     $('.display_user_stats').empty();
+    $('.autocomplete-stats').empty();
 }
 // Grabs the user's location from browser, user has to allow browser to grab their location.
 function getUserLocation(){
@@ -193,6 +214,7 @@ function filterArry(searchText){
     if(searchText.length === 0){
         matches = [];
         console.log(matches);
+        clearStats();
     }
 
     outputHTML(matches)
@@ -216,15 +238,25 @@ function outputHTML(matches){
 $('.match-list').on("click", function(e){
     console.log(e.target);
     userSearch.val(e.target.innerText); 
-    let slug = userSearch.val().toLowerCase().split(' ').join('-');
-    console.log(slug);
+    // Dont need slug, just need to match it to the country 
+    // let slug = userSearch.val().toLowerCase().split(' ').join('-');
+
+    // console.log(slug);
     console.log(userSearch.val());
 
     // Need to pass the slug into function that brings back results for that country!
+    userSelectedPlaceStats(userSearch.val());
+    $('.match-list').empty();
 })
 
 const userSearch = $('#country-sel');
-userSearch.on("input", function(e){
+
+userSearch.on("input keydown", function(e){
+    let key = e.keyCode;
+    if(key == 8){
+        console.log("the key works")
+        clearStats();
+    }
     let userIn = this.value.toLowerCase();
     console.log(userIn);
     filterArry(userIn)
