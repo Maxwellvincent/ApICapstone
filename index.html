@@ -4,55 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css" >
     <title>API Capstone</title>
 </head>
 <body>
     <header>
-        <h1>Easy to Find Covid-19 Data!</h1>
+        <div class="header">
+            <h1>Stat Covid-19 Data!</h1>
+        </div>
+        
     </header>
 
-     <!-- Need to add container --> 
-    <main class="covid-ctn">
-       
-        <h3>Global Covid-19 Stats</h3>
-        
-        
-        <div id="covid-div">
-
-        </div>
-        <br>
-        <!-- need to add space between here -->
-
-        <div id="usercovid-div">
-            <h4>Click to genereate current stats in your location as of this date: <span id="current-date"></span></h4>
-            <input type="button" id="user_current_location" value="Your Stat's">
-            
-            <div class="display_user_stats">
-
+    <main class="covid-ctn ">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs col-sm col-md col-lg-12">
+                    <h2>Global Covid-19 Stats</h2>
+                    <div id="covid-div"></div>
+                </div>
             </div>
-
-
+        </div><br>
+       
+        <div class="container-fluid">
+            <div id="usercovid-div" class="row">
+                <div class="col-xs col-sm col-md col-lg-12">
+                    <h5>Click to genereate current stats in your location as of this date: <span id="current-date"></span></h5>
+                    <input type="button" id="user_current_location" value="Your Stat's">
+                    <div class="display_user_stats"></div>
+                </div>
+            </div>
+        </div><br>
+        
+        <div class="container-fluid">
+            <div class="searchable_stats row">
+                <div class="col-xs col-sm col-md col-lg-12">
+                    <h4> Search Stats in other Countries</h4>
+                    <div class="autocomplete">
+                        <input type="text" id="country-sel"  placeholder="Search A Country">
+                        <div class="match-list"></div>
+                   </div>
+    
+                   <div class="autocomplete-stats"></div>
+                    
+                    <input type="submit">
+                </div>
+    
+            </div>
         </div>
-        <br>
-        <div class="searchable_stats">
-            <h4> Search Stats in other Countries</h4><br>
-            <!-- Make a container above in order to flex all data below -->
-
-            <!-- Maybe should make it type in country? with auto update or complete  -->
-
-               <div class="autocomplete" style="width: 300px;">
-                    <input type="text" id="country-sel"  placeholder="Search A Country">
-                    <div class="match-list"></div>
-
-               </div>
-               <div class="autocomplete-stats">
-                   
-               </div>
-                
-                <input type="submit">
-
-        </div>
-
+       
+            
     </main>
 
     <footer>
