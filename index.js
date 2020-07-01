@@ -18,7 +18,7 @@ function getCovidGlobalStats(){
         let listOfCountries = responsejson.Countries;
         
         // console.log(listOfCountries.find((data) => console.log(data.Slug)));
-        // let newCountryList = [];
+        
 
          listOfCountries.forEach((item) => {
             // create an array, and push each country the API has into the array.
@@ -78,10 +78,10 @@ function userSelectedPlaceStats(slug){
                         // create a function to place this data for stats in other Countries
 
                         // function placeSelectedCountryStats(data){
-                            let selCntryTot = data.TotalConfirmed;
-                            let selCntyTotDeaths = data.TotalDeaths;
-                            let selCntryNewCases = data.NewConfirmed;
-                            let selCntryNewDeaths = data.NewDeaths;
+                            let selCntryTot = data.TotalConfirmed.toLocaleString();
+                            let selCntyTotDeaths = data.TotalDeaths.toLocaleString();
+                            let selCntryNewCases = data.NewConfirmed.toLocaleString();
+                            let selCntryNewDeaths = data.NewDeaths.toLocaleString();
                             // we need total cases = data.TotalConfirmed
                                 let text1 = $('<p id="total-cases"></p>').text(`Total cases: ${selCntryTot}`);
                             //  total deaths = data.TotalDeaths
@@ -105,10 +105,10 @@ function userSelectedPlaceStats(slug){
 function placeUserspecificLocationStats(data){
     // data here is in reference to an object, that contains properties as Current Data, NewConfirmed cases, NewDeaths, NewRecovered, Slug, TotalConfirmed, TotalDeaths, TotalRecovered
         console.log(data);
-        let userTotalCases = data.TotalConfirmed;
-        let currentDate = data.Date;
-        let userNewCases = data.NewConfirmed;
-        let userDeathsToday = data.NewDeaths;
+        let userTotalCases = data.TotalConfirmed.toLocaleString();
+        let currentDate = data.Date.toLocaleString();
+        let userNewCases = data.NewConfirmed.toLocaleString();
+        let userDeathsToday = data.NewDeaths.toLocaleString();
         let userCurrentLocation = data.Country;
         let pElement1 = $('<p id="user-current-location"></p>').text(`Your current location is in: ${userCurrentLocation}`);
         let pElement2 = $('#current-date').text(`${currentDate}`);
@@ -134,15 +134,15 @@ function placeStat(stat){
     // console.log(Object.entries(stat));
 
     let newDeath = Object.entries(stat)[2][0];
-    let newDeathNum = Object.entries(stat)[2][1];
+    let newDeathNum = Object.entries(stat)[2][1].toLocaleString();
     let newConf = Object.entries(stat)[0][0];
-    let newConfNum = Object.entries(stat)[0][1];
+    let newConfNum = Object.entries(stat)[0][1].toLocaleString();
     let totalConf = Object.entries(stat)[1][0];
-    let totalConfNum = Object.entries(stat)[1][1];
+    let totalConfNum = Object.entries(stat)[1][1].toLocaleString();
     let totalDeaths = Object.entries(stat)[3][0];
-    let totalDeathsNum = Object.entries(stat)[3][1];
+    let totalDeathsNum = Object.entries(stat)[3][1].toLocaleString();
     let totalRecovered = Object.entries(stat)[5][0];
-    let totalRecoveredNum= Object.entries(stat)[5][1];
+    let totalRecoveredNum= Object.entries(stat)[5][1].toLocaleString();
     // to get yesterdays deaths, subtract new deaths from today, from total deaths
 
     
