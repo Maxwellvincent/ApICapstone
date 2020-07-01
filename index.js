@@ -156,6 +156,9 @@ function placeStat(stat){
 
 function clearStats(){
     $('.display_user_stats').empty();
+    
+}
+function clearRandomCountryStat(){
     $('.autocomplete-stats').empty();
 }
 // Grabs the user's location from browser, user has to allow browser to grab their location.
@@ -214,7 +217,7 @@ function filterArry(searchText){
     if(searchText.length === 0){
         matches = [];
         console.log(matches);
-        clearStats();
+        clearRandomCountryStat();
     }
 
     outputHTML(matches)
@@ -225,9 +228,9 @@ function outputHTML(matches){
 
     const html = matches.map(match => 
         `
-            <div class="sel-country">
+            <button class="sel-country">
                 <h4>${match}</h4>
-            </div>
+            </button>
         `
         ).join('');
     console.log(html);
@@ -251,7 +254,7 @@ $('.match-list').on("click", function(e){
 
 const userSearch = $('#country-sel');
 
-userSearch.on("input keydown", function(e){
+userSearch.on("input keydown submit", function(e){
     let key = e.keyCode;
     if(key == 8){
         console.log("the key works")
@@ -260,134 +263,12 @@ userSearch.on("input keydown", function(e){
     let userIn = this.value.toLowerCase();
     console.log(userIn);
     filterArry(userIn)
+    
 
-    // newCountryList.filter(function(item,e) {
-    //     console.log(this.value);
-    //     let divEle = $(`<div>${item}</div>`)
-    //     if(item.toLowerCase().indexOf(userIn) > - 1){
-            
-    //         divEle.css("display", "block");
-    //         $('.autocomplete').append(divEle);
-    //     } else {
-
-    //         divEle.css("display", "none");
-    //         $('.autocomplete').append(divEle); 
-    //     }
-    // });
-
-
-    // this works but is not hiding the elements after full search
-    // newCountryList.forEach((country) => {
-    //     // Create a div element for each country
-    //     let divEle = $(`<div>${country}</div>`)
-    //     if(country.toLowerCase().indexOf(this.value.toLowerCase()) > -1){
-    //         console.log(country);
-    //         // need to create element to store 
-    //         // add a display of block
-    //         $('.autocomplete').append(divEle.css("display","block"));
-    //     } else {
-    //         // need to hide other elements. 
-    //         // add display style of none
-    //         $('.autocomplete').append(divEle.css("display","none"));
-    //     }
-    //     console.log(divEle);
-    // });
 })
 
 
 
-
-// May not use this either
-// function filterCountries(inp,arr){
-//     console.log(inp);
-//     console.log(arr);
-//     inp.on('input', function(e) {
-//         console.log(this.id);
-//         let a,b,i;
-//         let userInput = this.value;
-//         console.log(userInput);
-        
-//         a = `<div id="${this.id} autocomplete-list" class="autocomplete-items"></div>`;
-//     $('.autocomplete').append(a);       
-
-//         for(i = 0; i < arr.length; i++){
-//             if(arr[i].substr(0,userInput.length).toUpperCase() == userInput.toUpperCase()){
-//                 b = `
-//                 <div>
-//                 <strong>${arr[i].substr(0,userInput.length)}</strong>
-//                 ${arr[i].substr(userInput.length)}
-//                 <input type="hidden" value="${arr[i]}">
-//                 </div>`;
-//                 console.log(b);
-                
-//             }
-//         }
-//         $('.autocomplete-items').append(b);
-//         console.log(typeof b);
-//         b.on("click", function(e){
-//             console.log(e.currentTarget);
-//         });
-//     });
-    
-//     function closeList(ele){
-//         let x = $('.autocomplete-items');
-//         console.log(x.length);
-//         for (i = 0; i < x.length; i++){
-//             if(ele != x[i] && ele != inp){
-//                 x[i].parentNode.removeChild(x[i]);
-//             }
-//         }
-//     }
-// }
-
-
-// filterCountries(searchCountry,newCountryList)
-
-// This grabs the search bar, and adds a keyup event
-// we want the user to filter through a list of Countries, 
-// to select the one that they want to view stats on. 
-// searchCountry.on("keyup", function grabUserInput(e){
-//     // This works
-//     console.log("this works");
-//     // List of countries works
-//     console.log(newCountryList);
-
-
-
-
-// //     e.preventDefault();
-// //     let userInputData = e.target.value;
-// //     let arryOfCountry = [];
-// //     fetch(`https://api.covid19api.com/summary`)
-// //     .then(response => response.json())
-// //     .then(responsejson => {
-// //         let listOfCountries = responsejson.Countries;
-        
-// //         listOfCountries.forEach((item) => {
-// //            arryOfCountry.push(item.Country.toLowerCase());
-// //         })
-// //         // console.log(arryOfCountry);
-// //         // console.log(userInputData);
-
-// //         for(i = 0; i < arryOfCountry.length; i++){
-// //             if(arryOfCountry[i].indexOf(userInputData) > -1){
-
-// //                 if(arryOfCountry[i] == userInputData){
-// //                     $('#country-choices').append(`<option value="${arryOfCountry[i]}"${arryOfCountry[i]}</option>`);
-// //                 }
-                
-// //             } 
-// //         }
-// //     });
-
-// //    let userValue = $('#Country-sel').val()
-// //    console.log(userValue);
-// //    if(userValue.includes(' ')){
-// //        let slugForm = userValue.split(' ').join('-');
-// //        console.log(slugForm);
-// //    }
-    
-// });
 
 
 

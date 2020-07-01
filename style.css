@@ -10,14 +10,80 @@ body {
 }
 
 .header {
-    height: 25vh;
-    background-color: #2d767f;
+    height: 30vh;
     border-bottom: 2px solid black;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    
 }
+
 
 .container-fluid {
     text-align: center;
 }
 
+.bg-img {
+    position: absolute;
+    
+    /* background: #333 url('/coronavirus.jpg'); */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 30vh;
+    z-index: -1;
+    opacity: 0.9;
+}
 
+input {
+    width: 70%;
+    height: 35px;
+    text-align: center;
+    margin-top: 20px;
+    background: #d72323;
+    color: #f5eded;
+    border-radius: 4px;
+
+}
+
+input::-webkit-input-placeholder{
+    color:white;
+}
+
+#country-sel {
+    margin-bottom: 10px;
+}
+
+.autocomplete {
+    margin-bottom: 20px;
+}
+
+.sel-country {
+    margin-bottom: 10px;
+}
+
+button .sel-country {
+    width: 30%;
+}
+
+.sel-country h4 {
+    padding: 5px;
+}
+
+.sel-country h4:hover {
+    background-color: cadetblue;
+   
+}
+
+h3 {
+    margin-top: 10px;
+}
+
+@media (min-width: 780) {
+    input #country-sel {
+        font-size: inherit;
+    }
+}
