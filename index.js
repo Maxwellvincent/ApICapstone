@@ -106,12 +106,13 @@ function placeUserspecificLocationStats(data){
     // data here is in reference to an object, that contains properties as Current Data, NewConfirmed cases, NewDeaths, NewRecovered, Slug, TotalConfirmed, TotalDeaths, TotalRecovered
         console.log(data);
         let userTotalCases = data.TotalConfirmed.toLocaleString();
-        let currentDate = data.Date.toLocaleString();
+        let currentDate = new Date(data.Date);
+        // let finalCurrentDate = currentDate.toDateString();
         let userNewCases = data.NewConfirmed.toLocaleString();
         let userDeathsToday = data.NewDeaths.toLocaleString();
         let userCurrentLocation = data.Country;
-        let pElement1 = $('<p id="user-current-location"></p>').text(`Your current location is in: ${userCurrentLocation}`);
-        let pElement2 = $('#current-date').text(`${currentDate}`);
+        let pElement1 = $('<p id="user-current-location"></p>').text(`Your current location is in: ${userCurrentLocation}, `);
+        let pElement2 = $('#current-date').text(` ${currentDate}`);
         pElement1.append(" ",pElement2);
         let pElement3 = $('<p id="user-total-cases"></p>').text(`Total cases: ${userTotalCases}`);
         let pElement4 = $('<p id="user-new-cases"></p>').text(`New Cases: ${userNewCases}`);
