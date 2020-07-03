@@ -31,7 +31,7 @@ function getCovidGlobalStats(){
 }
 
 function getLocationSpecificCovidStats(country){
-    console.log(country);
+    // console.log(country);
     fetch(`https://api.covid19api.com/summary`)
     .then(response => response.json())
     // Figure out how to get the users (country) to match the object for the data
@@ -116,7 +116,7 @@ function placeUserspecificLocationStats(data){
         pElement1.append(" ",pElement2);
         let pElement3 = $('<p id="user-total-cases"></p>').text(`Total cases: ${userTotalCases}`);
         let pElement4 = $('<p id="user-new-cases"></p>').text(`New Cases: ${userNewCases}`);
-        let pElement5 = $('<p id="user-new-deaths-today"></p>').text(`Total Deaths: ${userDeathsToday}`);
+        let pElement5 = $('<p id="user-new-deaths-today"></p>').text(`New Deaths Today: ${userDeathsToday}`);
 
         // console.log(userTotalCases);
         // $('#user-current-location').append(` ${userCurrentLocation}`);
@@ -128,6 +128,7 @@ function placeUserspecificLocationStats(data){
         $('.display_user_stats').append(pElement1,pElement3,pElement4,pElement5);
 
         // could possibly loop through this data and place all stats.
+        setTimeout(`$("#user_current_location").removeAttr("disabled")`, 2000);
 }
 
 function placeStat(stat){
@@ -196,8 +197,11 @@ function setUserLocation(latitude,longitude){
 
 
 userLocation.on("click", (e) => {
-    // clears current html
+    e.target.disabled = true;
     clearStats();
+    console.log(e.target);
+    // clears current html
+    
     // Need to clear information if clicked again!!!!
     // function clearData()
     // what do we want to happen when this is clicked?
@@ -256,6 +260,7 @@ $('.match-list').on("click", function(e){
 const userSearch = $('#country-sel');
 
 userSearch.on("input keydown submit", function(e){
+    e.target.attr("placeholder", "");
     let key = e.keyCode;
     if(key == 8){
         console.log("the key works")

@@ -81,8 +81,9 @@ h3 {
     margin-top: 10px;
 }
 
-@media (min-width: 780) {
-    input #country-sel {
-        font-size: inherit;
+@media  (min-width: 780px) {
+    input  {
+        font-size: large;
     }
 }
+
