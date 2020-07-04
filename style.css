@@ -39,7 +39,7 @@ body {
 
 input {
     width: 70%;
-    height: 35px;
+    height: 30px;
     text-align: center;
     margin-top: 20px;
     background: #d72323;
@@ -49,11 +49,14 @@ input {
 }
 
 input::-webkit-input-placeholder{
-    color:white;
+    color:#f5eded;
 }
 
 #country-sel {
     margin-bottom: 10px;
+    border: none;
+    background-color: #3e3636;
+    
 }
 
 .autocomplete {
@@ -87,3 +90,14 @@ h3 {
     }
 }
 
+.covid-ctn {
+    background: #3e3636;
+    margin: auto;
+    
+}
+
+.main {
+    background: white;
+    border-radius: 10px;
+    margin-top: 10px;
+}

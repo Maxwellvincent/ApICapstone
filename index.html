@@ -17,42 +17,43 @@
     </header>
 
     <main class="covid-ctn ">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs col-sm col-md col-lg-12">
-                    <h3>Global Statistics</h3>
-                    <div id="covid-div"></div>
+        <div class="main">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs col-sm col-md col-lg-12">
+                        <h3>Global Statistics</h3>
+                        <div id="covid-div"></div>
+                    </div>
                 </div>
-            </div>
-        </div><br>
-       
-        <div class="container-fluid">
-            <div id="usercovid-div" class="row">
-                <div class="col-xs col-sm col-md col-lg-12">
-                    <h5>Click to generate current statistics in your location as of this date: <span id="current-date"></span></h5>
-                    <input type="button" id="user_current_location" value="Your Stat's">
-                    <div class="display_user_stats"></div>
+            </div><br>
+           
+            <div class="container-fluid">
+                <div id="usercovid-div" class="row">
+                    <div class="col-xs col-sm col-md col-lg-12">
+                        <h5>Click to generate current statistics in your location as of this date: <span id="current-date"></span></h5>
+                        <input type="button" id="user_current_location" value="Statistics">
+                        <div class="display_user_stats"></div>
+                    </div>
                 </div>
-            </div>
-        </div><br>
+            </div><br>
+            
+            <div class="container-fluid">
+                <div class="searchable_stats row">
+                    <div class="col-xs col-sm col-md col-lg-12">
+                        <h4> Search Stats in other Countries</h4>
+                        <div class="autocomplete">
+                            <input type="search" id="country-sel"  placeholder="Type to Search A Country...">
+                            <div class="match-list"></div>
+                       </div>
         
-        <div class="container-fluid">
-            <div class="searchable_stats row">
-                <div class="col-xs col-sm col-md col-lg-12">
-                    <h4> Search Stats in other Countries</h4>
-                    <div class="autocomplete">
-                        <input type="text" id="country-sel"  placeholder="Type to Search A Country">
-                        <div class="match-list"></div>
-                   </div>
-    
-                   <div class="autocomplete-stats"></div>
-                    
-                    <!-- <input type="submit"> -->
+                       <div class="autocomplete-stats"></div>
+                        
+                        <!-- <input type="submit"> -->
+                    </div>
+        
                 </div>
-    
             </div>
         </div>
-       
             
     </main>
 
