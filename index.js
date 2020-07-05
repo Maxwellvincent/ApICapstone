@@ -260,7 +260,7 @@ $('.match-list').on("click", function(e){
 const userSearch = $('#country-sel');
 
 userSearch.on("input keydown submit", function(e){
-    e.target.attr("placeholder", "");
+    
     let key = e.keyCode;
     if(key == 8){
         console.log("the key works")
