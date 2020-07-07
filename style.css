@@ -27,7 +27,7 @@ body {
 
 .bg-img {
     position: absolute;
-    background: #333 url('./coronavirus.jpg');
+    background: #333 url('./ApICapstone/coronavirus.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
