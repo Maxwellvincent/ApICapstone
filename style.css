@@ -49,14 +49,14 @@ input {
 }
 
 input::-webkit-input-placeholder{
-    color:#f5eded;
+    color: black;
 }
 
 #country-sel {
-    margin-bottom: 10px;
+    margin-bottom: 40px;
     border: none;
-    background-color: #3e3636;
-    
+    background-color: whitesmoke;
+    color: black;
 }
 
 .autocomplete {

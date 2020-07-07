@@ -259,15 +259,14 @@ $('.match-list').on("click", function(e){
 
 const userSearch = $('#country-sel');
 
-userSearch.on("input keydown submit", function(e){
+userSearch.on("input keydown submit click", function(e){
     
     let key = e.keyCode;
     if(key == 8){
-        console.log("the key works")
         clearStats();
     }
     let userIn = this.value.toLowerCase();
-    console.log(userIn);
+    // console.log(userIn);
     filterArry(userIn)
     
 
