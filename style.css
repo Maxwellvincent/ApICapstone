@@ -85,10 +85,19 @@ h3 {
     margin-top: 10px;
 }
 
-@media  (min-width: 780px) {
+@media all and (min-width: 780px) {
     input  {
         font-size: large;
     }
+
+    .group {
+        display: flex;
+    }
+
+    .user-statistics {
+        margin: auto;
+    }
+
 }
 
 .covid-ctn {
@@ -102,3 +111,4 @@ h3 {
     border-radius: 10px;
     margin-top: 10px;
 }
+

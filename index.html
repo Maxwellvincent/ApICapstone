@@ -18,24 +18,31 @@
 
     <main class="covid-ctn ">
         <div class="main">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-xs col-sm col-md col-lg-12">
-                        <h3>Global Statistics</h3>
-                        <div id="covid-div"></div>
-                    </div>
+            <div class="group">
+                <div class="item">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs col-sm col-md col-lg-12">
+                                <h3>Global Statistics</h3>
+                                <div id="covid-div"></div>
+                            </div>
+                        </div>
+                    </div><br>
                 </div>
-            </div><br>
-           
-            <div class="container-fluid">
-                <div id="usercovid-div" class="row">
-                    <div class="col-xs col-sm col-md col-lg-12">
-                        <h5>Click to generate current statistics in your location as of this date: <span id="current-date"></span></h5>
-                        <input type="button" id="user_current_location" value="Statistics">
-                        <div class="display_user_stats"></div>
-                    </div>
+
+                <div class="item user-statistics">
+                    <div class="container-fluid">
+                        <div id="usercovid-div" class="row">
+                            <div class="col-xs col-sm col-md col-lg-12">
+                                <h5>Click to generate current statistics in your location as of this date: <span id="current-date"></span></h5>
+                                <input type="button" id="user_current_location" value="Statistics">
+                                <div class="display_user_stats"></div>
+                            </div>
+                        </div>
+                    </div><br>
                 </div>
-            </div><br>
+
+            </div>
             
             <div class="container-fluid">
                 <div class="searchable_stats row">
