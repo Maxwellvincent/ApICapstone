@@ -55,13 +55,13 @@ function getLocationSpecificCovidStats(country){
             //     };
             // }));
         })
-    .catch((error) => alert(error));
+    .catch((error) => console.log(error));
     
 }
 
 function userSelectedPlaceStats(slug){
-    console.log("This works")
-    console.log(slug);
+    // console.log("This works")
+    // console.log(slug);
     fetch(`https://api.covid19api.com/summary`)
     .then(response => response.json())
     // Figure out how to get the users (country) to match the object for the data
@@ -74,7 +74,7 @@ function userSelectedPlaceStats(slug){
             listOfCountries.filter((data) => {
                 
                     if(data.Country == slug) {
-                        console.log(data);
+                        // console.log(data);
                         // create a function to place this data for stats in other Countries
 
                         // function placeSelectedCountryStats(data){
@@ -104,7 +104,7 @@ function userSelectedPlaceStats(slug){
 
 function placeUserspecificLocationStats(data){
     // data here is in reference to an object, that contains properties as Current Data, NewConfirmed cases, NewDeaths, NewRecovered, Slug, TotalConfirmed, TotalDeaths, TotalRecovered
-        console.log(data);
+        // console.log(data);
         let userTotalCases = data.TotalConfirmed.toLocaleString();
         let currentDate = new Date(data.Date);
         // let finalCurrentDate = currentDate.toDateString();
@@ -199,7 +199,7 @@ function setUserLocation(latitude,longitude){
 userLocation.on("click", (e) => {
     e.target.disabled = true;
     clearStats();
-    console.log(e.target);
+    // console.log(e.target);
     // clears current html
     
     // Need to clear information if clicked again!!!!
